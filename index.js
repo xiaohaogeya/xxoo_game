@@ -38,19 +38,15 @@ function clickCell(event) {
 }
 // 判赢函数
 function checkWin(player) {
-    var isWin = winsArr.some(function (item) {
-        var cellIndex1 = item[0];
-        var cellIndex2 = item[1];
-        var cellIndex3 = item[2];
-        var cell1 = cells[cellIndex1];
-        var cell2 = cells[cellIndex2];
-        var cell3 = cells[cellIndex3];
-        if (cell1.classList.contains(player) &&
-            cell2.classList.contains(player) &&
-            cell3.classList.contains(player)) {
+    return winsArr.some(function (item) {
+        if (hasClass(cells[item[0]], player) &&
+            hasClass(cells[item[1]], player) &&
+            hasClass(cells[item[2]], player))
             return true;
-        }
         return false;
     });
-    return isWin;
+}
+// 判断DOM是否有player类名
+function hasClass(el, player) {
+    return el.classList.contains(player);
 }

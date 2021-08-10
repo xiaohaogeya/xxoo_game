@@ -47,23 +47,18 @@ function clickCell(event: MouseEvent) {
 
 // 判赢函数
 function checkWin(player: Player): boolean {
-    let isWin = winsArr.some(function (item) {
-        let cellIndex1 = item[0]
-        let cellIndex2 = item[1]
-        let cellIndex3 = item[2]
-
-        let cell1 = cells[cellIndex1]
-        let cell2 = cells[cellIndex2]
-        let cell3 = cells[cellIndex3]
-
+    return winsArr.some(function (item) {
         if (
-            cell1.classList.contains(player) &&
-            cell2.classList.contains(player) &&
-            cell3.classList.contains(player) 
-        ) {
-            return true
-        } 
+            hasClass(cells[item[0]], player) &&
+            hasClass(cells[item[1]], player) &&
+            hasClass(cells[item[2]], player) 
+        ) return true
+        
         return false
     })
-    return isWin
+}
+
+// 判断DOM是否有player类名
+function hasClass(el:Element, player: string): boolean {
+    return el.classList.contains(player)
 }
