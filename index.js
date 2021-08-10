@@ -1,6 +1,7 @@
 // 获取所有单元格列表
 var cells = document.querySelectorAll('.cell');
-// console.log(cells);
+// 玩家
+var currentPlayer = 'x';
 // 每个单元格添加点击事件
 cells.forEach(function (item) {
     var cell = item;
@@ -10,5 +11,6 @@ cells.forEach(function (item) {
 function clickCell(event) {
     // 给当前点击事件的单元格添加类名x
     var target = event.target;
-    target.classList.add('x');
+    target.classList.add(currentPlayer);
+    currentPlayer = currentPlayer === 'x' ? 'o' : 'x';
 }
