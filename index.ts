@@ -20,12 +20,15 @@ let winner = document.querySelector('#winner') as HTMLParagraphElement
 // 重新开始
 let restart = document.querySelector('#restart') as HTMLButtonElement
 // 玩家
-let currentPlayer = Player.X
+let currentPlayer: Player
 // 步数
-let steps = 0
+let steps: number
 
 // 重新开始
-restart.addEventListener('click', function () {
+restart.addEventListener('click', startGame)
+// 初始化游戏数据
+startGame()
+function startGame() {
     // 隐藏信息面板
     message.style.display = 'none'
 
@@ -48,13 +51,7 @@ restart.addEventListener('click', function () {
         cell.removeEventListener('click', clickCell)
         cell.addEventListener('click', clickCell, { once: true })
     })
-})
-
-// 每个单元格添加点击事件
-cells.forEach(function (item) {
-    let cell = item as HTMLDivElement
-    cell.addEventListener('click', clickCell, { once: true })
-})
+}
 
 // 棋牌中单元格的click事件处理程序
 function clickCell(event: MouseEvent) {

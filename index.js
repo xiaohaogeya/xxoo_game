@@ -21,11 +21,14 @@ var winner = document.querySelector('#winner');
 // 重新开始
 var restart = document.querySelector('#restart');
 // 玩家
-var currentPlayer = Player.X;
+var currentPlayer;
 // 步数
-var steps = 0;
+var steps;
 // 重新开始
-restart.addEventListener('click', function () {
+restart.addEventListener('click', startGame);
+// 初始化游戏数据
+startGame();
+function startGame() {
     // 隐藏信息面板
     message.style.display = 'none';
     // 初始化步数
@@ -43,12 +46,7 @@ restart.addEventListener('click', function () {
         cell.removeEventListener('click', clickCell);
         cell.addEventListener('click', clickCell, { once: true });
     });
-});
-// 每个单元格添加点击事件
-cells.forEach(function (item) {
-    var cell = item;
-    cell.addEventListener('click', clickCell, { once: true });
-});
+}
 // 棋牌中单元格的click事件处理程序
 function clickCell(event) {
     // 给当前点击事件的单元格添加类名x
