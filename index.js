@@ -12,11 +12,38 @@ var winsArr = [
 ];
 // 获取所有单元格列表
 var cells = document.querySelectorAll('.cell');
+// 游戏面板
 var gameBord = document.querySelector('#bord');
+// 信息面板
+var message = document.querySelector('#message');
+// 获胜者
+var winner = document.querySelector('#winner');
+// 重新开始
+var restart = document.querySelector('#restart');
 // 玩家
 var currentPlayer = Player.X;
 // 步数
 var steps = 0;
+// 重新开始
+restart.addEventListener('click', function () {
+    // 隐藏信息面板
+    message.style.display = 'none';
+    // 初始化步数
+    steps = 0;
+    // 重置默认玩家为x
+    currentPlayer = Player.X;
+    // 重置下棋提示为x
+    gameBord.classList.remove(Player.O, Player.X);
+    gameBord.classList.add(currentPlayer);
+    // 清空棋盘
+    cells.forEach(function (item) {
+        var cell = item;
+        cell.classList.remove(Player.O, Player.X);
+        // 移除单元格事件，重新绑定事件
+        cell.removeEventListener('click', clickCell);
+        cell.addEventListener('click', clickCell, { once: true });
+    });
+});
 // 每个单元格添加点击事件
 cells.forEach(function (item) {
     var cell = item;
@@ -31,11 +58,14 @@ function clickCell(event) {
     // 判断是否获胜
     var isWin = checkWin(currentPlayer);
     if (isWin) {
-        console.log('赢了');
+        message.style.display = 'block';
+        winner.innerText = currentPlayer + '  赢啦!!!';
         return;
     }
     // 判断平局
     if (steps === 9) {
+        message.style.display = 'block';
+        winner.innerText = '平局';
         return;
     }
     // 切换玩家
