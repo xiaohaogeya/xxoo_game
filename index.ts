@@ -16,6 +16,8 @@ let gameBord = document.querySelector('#bord')
 // 玩家
 let currentPlayer = Player.X
 
+// 步数
+let steps = 0
 
 
 // 每个单元格添加点击事件
@@ -30,11 +32,18 @@ function clickCell(event: MouseEvent) {
     let target = event.target as HTMLDivElement
     target.classList.add(currentPlayer)
 
+    steps ++
+
     // 判断是否获胜
     let isWin = checkWin(currentPlayer)
     if (isWin) {
         console.log('赢了');
-        
+        return
+    }
+
+    // 判断平局
+    if (steps === 9){
+        return
     }
 
     // 切换玩家
@@ -53,7 +62,7 @@ function checkWin(player: Player): boolean {
             hasClass(cells[item[1]], player) &&
             hasClass(cells[item[2]], player) 
         ) return true
-        
+
         return false
     })
 }

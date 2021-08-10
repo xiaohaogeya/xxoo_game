@@ -15,6 +15,8 @@ var cells = document.querySelectorAll('.cell');
 var gameBord = document.querySelector('#bord');
 // 玩家
 var currentPlayer = Player.X;
+// 步数
+var steps = 0;
 // 每个单元格添加点击事件
 cells.forEach(function (item) {
     var cell = item;
@@ -25,10 +27,16 @@ function clickCell(event) {
     // 给当前点击事件的单元格添加类名x
     var target = event.target;
     target.classList.add(currentPlayer);
+    steps++;
     // 判断是否获胜
     var isWin = checkWin(currentPlayer);
     if (isWin) {
         console.log('赢了');
+        return;
+    }
+    // 判断平局
+    if (steps === 9) {
+        return;
     }
     // 切换玩家
     currentPlayer = currentPlayer === Player.X ? Player.O : Player.X;
