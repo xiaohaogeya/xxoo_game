@@ -1,9 +1,15 @@
+// 创建枚举
+enum Player {
+    X = 'x',
+    O = 'o'
+}
+
 // 获取所有单元格列表
-let cells= document.querySelectorAll('.cell')
+let cells = document.querySelectorAll('.cell')
 
 let gameBord = document.querySelector('#bord')
 // 玩家
-let currentPlayer = 'x'
+let currentPlayer: Player = Player.X
 
 
 
@@ -19,9 +25,9 @@ function clickCell(event: MouseEvent) {
     let target = event.target as HTMLDivElement
     target.classList.add(currentPlayer)
     // 切换玩家
-    currentPlayer = currentPlayer === 'x' ? 'o' : 'x'
+    currentPlayer = currentPlayer === Player.X ? Player.O : Player.X
 
     // 切换玩家提示
-    gameBord.classList.remove('x', 'o')
+    gameBord.classList.remove(Player.O, Player.X)
     gameBord.classList.add(currentPlayer)
 }

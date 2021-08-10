@@ -1,8 +1,14 @@
+// 创建枚举
+var Player;
+(function (Player) {
+    Player["X"] = "x";
+    Player["O"] = "o";
+})(Player || (Player = {}));
 // 获取所有单元格列表
 var cells = document.querySelectorAll('.cell');
 var gameBord = document.querySelector('#bord');
 // 玩家
-var currentPlayer = 'x';
+var currentPlayer = Player.X;
 // 每个单元格添加点击事件
 cells.forEach(function (item) {
     var cell = item;
@@ -14,8 +20,8 @@ function clickCell(event) {
     var target = event.target;
     target.classList.add(currentPlayer);
     // 切换玩家
-    currentPlayer = currentPlayer === 'x' ? 'o' : 'x';
+    currentPlayer = currentPlayer === Player.X ? Player.O : Player.X;
     // 切换玩家提示
-    gameBord.classList.remove('x', 'o');
+    gameBord.classList.remove(Player.O, Player.X);
     gameBord.classList.add(currentPlayer);
 }
